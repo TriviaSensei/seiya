@@ -87,12 +87,7 @@ module.exports = class playerStats {
 			})
 		);
 
-		// console.log(bsTemp[0].data);
-
 		const boxScores = bsTemp.map((b) => {
-			// console.log(b.data);
-			// console.log(b.data.teams.away.teamStats);
-			// console.log(b.data.teams.away.info);
 			if (b.data.teams.home.team.id === this.teamId)
 				return b.data.teams.home.players[`ID${this.playerId}`];
 			if (b.data.teams.away.team.id === this.teamId)

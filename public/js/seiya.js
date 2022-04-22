@@ -17,8 +17,6 @@ const setPageElements = (data) => {
 	let nextGame = null;
 	let statLineGame = null;
 
-	console.log(data.offset);
-
 	for (var i = 0; i < data.today.length; i++) {
 		if (data.today[i].status.codedGameState === 'F') {
 			lastGame = data.today[i];
