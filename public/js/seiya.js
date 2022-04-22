@@ -46,10 +46,6 @@ const setPageElements = (data) => {
 		}
 	}
 
-	console.log(lastGame);
-	console.log(nextGame);
-	console.log(currentGame);
-
 	const pic = document.getElementById('seiya-picture');
 	const status = document.getElementById('status');
 	const info = document.getElementById('game-info');
