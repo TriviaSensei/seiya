@@ -17,7 +17,6 @@ header {
 #container {
 	height: 100%;
 	width: 100%;
-	max-width: 600px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -29,17 +28,22 @@ header {
 	flex-basis: 1;
 	flex-grow: 1;
 	display: flex;
+	width: 90%;
 }
 
 #img-div {
-	width: 400px;
+	width: 100%;
 	margin: auto;
+}
+
+#img-div img {
+	width: 100%;
 }
 #status-container {
 	flex: 1;
 	flex-basis: 1;
 	flex-grow: 1;
-	font-size: 5vh;
+	font-size: 7vh;
 	font-weight: bold;
 	display: flex;
 }
@@ -54,7 +58,7 @@ header {
 	flex-grow: 1;
 	text-align: center;
 	display: flex;
-	font-size: 2.5vh;
+	font-size: 4vh;
 }
 
 .no-hit {
