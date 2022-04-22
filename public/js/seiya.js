@@ -130,11 +130,13 @@ const setStatLine = (game) => {
 	const gameSituation = game.gameSituation;
 
 	if (game.status.codedGameState === 'I') {
-		str = `${score} ${opponent}, ${gameSituation}<br>`;
+		str = `<a href="https://www.mlb.com/gameday/${game.gamePk}" target="_blank">${score} ${opponent}, ${gameSituation}</a><br>`;
 	} else if (game.status.codedGameState === 'F') {
-		str = `${result} ${score} ${opponent.trim()}, ${gameSituation}<br>`;
+		str = `<a href="https://www.mlb.com/gameday/${
+			game.gamePk
+		}/final/box" target="_blank">${result} ${score} ${opponent.trim()}, ${gameSituation}</a><br>`;
 	} else if (game.status.codedGameState === 'P') {
-		str = `Warmup ${opponent}`;
+		str = `<a href="https://www.mlb.com/gameday/${game.gamePk}/preview" target="_blank">Warmup ${opponent}</a>`;
 	} else if (game.status.codedGameState === 'S') {
 		let UTCHour = parseInt(game.gameDate.split('T')[1].split(':')[0]);
 		let min = game.gameDate.split('T')[1].split(':')[1];
@@ -142,7 +144,9 @@ const setStatLine = (game) => {
 		let time = `${ETHour > 12 ? ETHour - 12 : ETHour}:${min} ${
 			ETHour > 12 ? 'PM' : 'AM'
 		} ET`;
-		str = `Next game: today ${opponent.trim()}, ${time}`;
+		str = `Next game: <a href="https://www.mlb.com/gameday/${
+			game.gamePk
+		}/preview" target="_blank">today ${opponent.trim()}, ${time}</a>`;
 	}
 
 	if (
