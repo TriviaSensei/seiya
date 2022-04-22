@@ -17,6 +17,8 @@ const setPageElements = (data) => {
 	let nextGame = null;
 	let statLineGame = null;
 
+	console.log(data.offset);
+
 	for (var i = 0; i < data.today.length; i++) {
 		if (data.today[i].status.codedGameState === 'F') {
 			lastGame = data.today[i];
@@ -44,9 +46,9 @@ const setPageElements = (data) => {
 		}
 	}
 
-	// console.log(lastGame);
-	// console.log(nextGame);
-	// console.log(currentGame);
+	console.log(lastGame);
+	console.log(nextGame);
+	console.log(currentGame);
 
 	const pic = document.getElementById('seiya-picture');
 	const status = document.getElementById('status');
@@ -140,7 +142,13 @@ const setStatLine = (game) => {
 	} else if (game.status.codedGameState === 'P') {
 		str = `Warmup ${opponent}`;
 	} else if (game.status.codedGameState === 'S') {
-		str = `Next game: today ${opponent}`;
+		let UTCHour = parseInt(game.gameDate.split('T')[1].split(':')[0]);
+		let min = game.gameDate.split('T')[1].split(':')[1];
+		let ETHour = (24 + UTCHour - data.offset) % 24;
+		let time = `${ETHour > 12 ? ETHour - 12 : ETHour}:${min} ${
+			ETHour > 12 ? 'PM' : 'AM'
+		} ET`;
+		str = `Next game: today ${opponent.trim()}, ${time}`;
 	}
 
 	if (
