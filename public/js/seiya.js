@@ -20,13 +20,13 @@ const setPageElements = (data) => {
 	for (var i = 0; i < data.today.length; i++) {
 		if (data.today[i].status.codedGameState === 'F') {
 			lastGame = data.today[i];
-		} else if (data.today[i].status.codedGameState === 'I') {
+		} else if (
+			data.today[i].status.codedGameState === 'I' ||
+			data.today[i].status.codedGameState === 'P'
+		) {
 			currentGame = data.today[i];
 			break;
-		} else if (
-			data.today[i].status.codedGameState === 'P' ||
-			data.today[i].status.codedGameState === 'S'
-		) {
+		} else if (data.today[i].status.codedGameState === 'S') {
 			nextGame = data.today[i];
 			break;
 		}
