@@ -1,4 +1,5 @@
 let statLine = '';
+let offset = '';
 
 const setPageElements = (data) => {
 	/**
@@ -11,6 +12,8 @@ const setPageElements = (data) => {
 	 */
 
 	const maxWidth = 400;
+
+	offset = data.offset;
 
 	let lastGame = null;
 	let currentGame = null;
@@ -50,9 +53,13 @@ const setPageElements = (data) => {
 
 	let statusLine = '';
 
+	console.log(currentGame);
+	console.log(lastGame);
+	console.log(nextGame);
+
 	if (currentGame) {
 		statLineGame = currentGame;
-		if (statLineGame.boxScore.stats.batting.hits === 0) {
+		if (!statLineGame.boxScore.stats.batting.hits) {
 			statusLine = 'Sei-NOT YET';
 			status.classList.add('no-hit-yet');
 			pic.src = '/img/seiya-bat.png';
@@ -135,18 +142,24 @@ const setStatLine = (game) => {
 		str = `<a href="https://www.mlb.com/gameday/${
 			game.gamePk
 		}/final/box" target="_blank">${result} ${score} ${opponent.trim()}, ${gameSituation}</a><br>`;
-	} else if (game.status.codedGameState === 'P') {
+	} else if (
+		game.status.codedGameState === 'P' &&
+		game.status.abstractGameState === 'Warmup'
+	) {
 		str = `<a href="https://www.mlb.com/gameday/${game.gamePk}/preview" target="_blank">Warmup ${opponent}</a>`;
-	} else if (game.status.codedGameState === 'S') {
+	} else if (
+		game.status.codedGameState === 'P' ||
+		game.status.codedGameState === 'S'
+	) {
 		let UTCHour = parseInt(game.gameDate.split('T')[1].split(':')[0]);
 		let min = game.gameDate.split('T')[1].split(':')[1];
-		let ETHour = (24 + UTCHour - data.offset) % 24;
+		let ETHour = (24 + UTCHour - offset) % 24;
 		let time = `${ETHour > 12 ? ETHour - 12 : ETHour}:${min} ${
 			ETHour > 12 ? 'PM' : 'AM'
 		} ET`;
 		str = `Next game: <a href="https://www.mlb.com/gameday/${
 			game.gamePk
-		}/preview" target="_blank">today ${opponent.trim()}, ${time}</a>`;
+		}/preview" target="_blank">Today ${opponent.trim()}, ${time}</a>`;
 	}
 
 	if (
